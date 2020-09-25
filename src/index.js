@@ -1,9 +1,10 @@
-const { getPRs, postSlackMsg } = require('./api.js')
+const { formatDistanceToNow } = require('date-fns')
+const { getPRs, postSlackMsg, getPR } = require('./api.js')
 
 function getIntroMsg(numberOfPRs) {
-  if (numberOfPRs === 1) return 'There is 1 PR that still needs a reviewer.'
+  if (numberOfPRs === 1) return 'There is 1 PR that still needs to be reviewed.'
 
-  return `There are ${numberOfPRs} PRs that still need reviewers.`
+  return `There are ${numberOfPRs} PRs that still need to be reviewed.`
 }
 
 async function start() {
@@ -25,13 +26,14 @@ async function start() {
           },
         },
         ...PRsNeedingReview.map(PR => {
-          const { html_url, number, title } = PR
+          const { html_url, title, created_at } = PR
+          const timeSinceCreation = formatDistanceToNow(new Date(created_at))
 
           return {
             type: 'section',
             text: {
               type: 'mrkdwn',
-              text: `<${html_url}|:point_right: PR #${number} - ${title}>`,
+              text: `<${html_url}|:point_right: ${title}> _${timeSinceCreation} since pull request was opened_`,
             },
           }
         }),

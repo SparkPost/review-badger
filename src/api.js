@@ -1,12 +1,19 @@
 const axios = require('axios')
-const { GITHUB_AUTH_HEADER, GITHUB_API_URL, SLACK_WEBHOOK_URL } = require('./constants.js')
-const { GITHUB_REPOSITORY, INPUT_SLACKCHANNEL } = process.env
+const {
+  GITHUB_API_URL,
+  GITHUB_REPOSITORY,
+  GITHUB_TOKEN,
+  SLACK_CHANNEL,
+  SLACK_WEBHOOK_URL,
+} = require('./constants.js')
 
 function getPRs() {
   return axios({
     method: 'GET',
     url: `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls`,
-    headers: GITHUB_AUTH_HEADER,
+    headers: {
+      Authorization: GITHUB_TOKEN,
+    },
   }).catch(err => console.log(err))
 }
 
@@ -14,13 +21,13 @@ function postSlackMsg({ text, blocks } = {}) {
   if (!SLACK_WEBHOOK_URL)
     throw new Error('No SLACK_WEBHOOK_URL supplied - messages cannot be posted.')
 
-  if (!INPUT_SLACKCHANNEL) throw new Error('No slackChannel supplied - messages cannot be posted.')
+  if (!SLACK_CHANNEL) throw new Error('No slackChannel supplied - messages cannot be posted.')
 
   return axios({
     method: 'POST',
     url: SLACK_WEBHOOK_URL,
     data: {
-      channel: INPUT_SLACKCHANNEL,
+      channel: SLACK_CHANNEL,
       username: 'Review Badger',
       text,
       blocks,
