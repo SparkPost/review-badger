@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['standard', 'plugin:prettier/recommended'],
+  extends: ['standard', 'plugin:node/recommended', 'plugin:prettier/recommended'],
   env: {
     es6: true,
     node: true,
@@ -11,5 +11,12 @@ module.exports = {
   ignorePatterns: ['/node_modules/**'],
   rules: {
     'space-before-function-parent': 'off',
+    'no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
   },
 }
