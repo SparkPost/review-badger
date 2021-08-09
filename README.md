@@ -1,6 +1,12 @@
 # Review Badger
 
-## Example Usage
+## GitHub Action Installation
+
+Note, in order for this to work, be sure to have a token available with required permissions to
+leverage the GitHub GraphQL API:
+[Authenticating with GraphQL](https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql)
+
+### Example Usage
 
 ```yml
 name: Review Badger
@@ -22,3 +28,10 @@ jobs:
       with:
         slackChannel: '#general'
 ```
+
+## Publishing Changes
+
+1. Make desired changes
+2. Run `npm run build`
+3. Commit those compiled changes to the default branch
+
