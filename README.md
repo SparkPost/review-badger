@@ -14,7 +14,7 @@ jobs:
   pr-reviews-reminder:
     runs-on: ubuntu-latest
     steps:
-      uses: nicklemmon/review-badger@v1.0.1
+      uses: nicklemmon/review-badger@main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
