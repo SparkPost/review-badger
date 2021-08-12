@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicklemmon/review-badger.git"
+    "url": "git+https://github.com/sparkpost/review-badger.git"
   },
   "author": "Nick Lemmon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nicklemmon/review-badger/issues"
+    "url": "https://github.com/sparkpost/review-badger/issues"
   },
-  "homepage": "https://github.com/nicklemmon/review-badger#readme",
+  "homepage": "https://github.com/sparkpost/review-badger#readme",
   "dependencies": {
     "axios": "^0.20.0",
     "date-fns": "^2.16.1"
